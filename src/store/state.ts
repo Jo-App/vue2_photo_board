@@ -17,7 +17,7 @@ const state: State = {
   options: {
     currentPage: 1,
     pageGroupCount: 10,
-    selectList: [10, 30, 50, 80, 100],
+    selectList: [10, 20, 30],
     limit: 10,
   },
   modal: {
