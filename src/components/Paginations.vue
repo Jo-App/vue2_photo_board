@@ -125,6 +125,7 @@ ul {
 li {
   align-items: center;
   display: flex;
+  cursor: pointer;
 }
 span {
   border: none;
@@ -139,6 +140,10 @@ span {
   height: 32px;
   width: 32px;
   margin: 0.3rem 5px;
+}
+span:hover {
+  background-color: #e9ecef;
+  opacity: 0.7;
 }
 .active >>> span {
   background-color: teal;

@@ -17,11 +17,7 @@ import Modal from "@/components/Modal.vue";
     Modal,
   },
 })
-export default class AppVue extends Vue {
-  get modalShow(): number {
-    return this.$store.state.modal.show;
-  }
-}
+export default class AppVue extends Vue {}
 </script>
 
 <style>
