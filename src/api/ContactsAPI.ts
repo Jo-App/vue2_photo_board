@@ -2,7 +2,7 @@ import axios from "axios";
 const API_URL = "https://picsum.photos/";
 
 export default {
-  async getPhotoList(page: any, limit: any): Promise<object> {
+  async getPhotoList(page: any, limit: any): Promise<any> {
     const url = API_URL + "v2/list?page=" + page + "&limit=" + limit;
     const res = await axios.get(url, {});
     return res.data;

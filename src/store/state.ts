@@ -1,6 +1,8 @@
 export interface State {
   options: Options;
   modal: Modal;
+  isLoading: boolean;
+  isError: boolean;
 }
 export interface Modal {
   show: boolean;
@@ -24,6 +26,8 @@ const state: State = {
     show: false,
     item: {},
   },
+  isLoading: false,
+  isError: false,
 };
 
 export default state;

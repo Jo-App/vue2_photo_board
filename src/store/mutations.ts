@@ -2,6 +2,12 @@ import { MutationTree } from "vuex";
 import { State } from "./state";
 
 const mutation: MutationTree<State> = {
+  isLoadingSet: (state: State, value: boolean): void => {
+    state.isLoading = value;
+  },
+  isErrorSet: (state: State, value: boolean): void => {
+    state.isError = value;
+  },
   modalOpenClose: (state: State, payload: any): void => {
     state.modal.show = !state.modal.show;
     if (state.modal.show === true) {

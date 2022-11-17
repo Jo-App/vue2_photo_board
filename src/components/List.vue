@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="title">
-      <h3>photos</h3>
+      <h3>photos {{ isLoading }}</h3>
       <div>
         <select :value="limit" @change="setSelect($event)">
           <option
@@ -14,23 +14,29 @@
         </select>
       </div>
     </div>
-    <div class="wrapper">
-      <div class="container">
-        <Item
-          v-for="item in resultList"
-          :key="item.id"
-          :id="item.id"
-          :download_url="item.download_url"
-          :wSize="200"
-        ></Item>
-      </div>
+    <div v-if="isError" class="center">
+      <h2 style="text-align: center">Error !! {{ resultList }}</h2>
     </div>
-    <Paginations
-      class="paginations"
-      :totalCount="1000"
-      @getPhotoList="getPhotoList"
-      ref="childPaginations"
-    ></Paginations>
+    <div v-if="isLoading" class="center"><Loading></Loading></div>
+    <div v-if="resultList">
+      <div class="wrapper">
+        <div class="container">
+          <Item
+            v-for="item in resultList"
+            :key="item.id"
+            :id="item.id"
+            :download_url="item.download_url"
+            :wSize="200"
+          ></Item>
+        </div>
+      </div>
+      <Paginations
+        class="paginations"
+        :totalCount="1000"
+        @getPhotoList="getPhotoList"
+        ref="childPaginations"
+      ></Paginations>
+    </div>
   </div>
 </template>
 
@@ -39,6 +45,7 @@ import { Component, Vue } from "vue-property-decorator";
 import Item from "./Item.vue";
 import Paginations from "./Paginations.vue";
 import Modal from "./Modal.vue";
+import Loading from "./Layout/Loading.vue";
 
 @Component({
   name: "List",
@@ -46,9 +53,16 @@ import Modal from "./Modal.vue";
     Item,
     Paginations,
     Modal,
+    Loading,
   },
 })
 export default class ListVue extends Vue {
+  get isLoading(): boolean {
+    return this.$store.state.isLoading;
+  }
+  get isError(): boolean {
+    return this.$store.state.isError;
+  }
   get selectList(): number {
     return this.$store.state.options.selectList;
   }
@@ -68,7 +82,7 @@ export default class ListVue extends Vue {
     this.$store.state.options.currentPage = value;
   }
 
-  resultList: object[] = [];
+  resultList: any = [];
 
   $refs: any;
 
@@ -126,5 +140,11 @@ export default class ListVue extends Vue {
   left: 0;
   background: white;
   height: 45px;
+}
+.center {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>
